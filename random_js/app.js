@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 });
 
 // setting up a route for authentication purposes
-app.get('/random', (req, res, next) => {
+app.get('/getrandom', (req, res, next) => {
     res.status(200).json({
         randomNumber: (Math.floor(Math.random()*(100-1)+1))
     });

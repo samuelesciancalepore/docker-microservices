@@ -6,6 +6,7 @@ from urls import *
 
 ALLOWED_MATH_OPS = ['add', 'sub', 'mul', 'div', 'mod']
 ALLOWED_STR_OPS = ['lower', 'upper', 'concat', 'editdistance']
+ALLOWED_RANDOM_OPS = ['getrandom']
 
 app = Flask(__name__, instance_relative_config=True)
 
@@ -41,6 +42,23 @@ def string(op):
         return x.json()
     except ConnectionError:
         return make_response('Math service is down\n', 404)
+    except HTTPError:
+        return make_response('Invalid input\n', 400)
+
+
+@app.route('/random/<op>')
+def random(op):
+    # a = request.args.get('a', type=str)
+    # b = request.args.get('b', type=str)
+    if op not in ALLOWED_RANDOM_OPS:
+        return make_response('Invalid operation\n', 404)
+    try:
+        if op == 'getrandom':
+            x = requests.get(RANDOM_URL + f'/{op}')
+        x.raise_for_status()
+        return x.json()
+    except ConnectionError:
+        return make_response('Random service is down\n', 404)
     except HTTPError:
         return make_response('Invalid input\n', 400)
 
