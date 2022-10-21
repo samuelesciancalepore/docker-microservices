@@ -2,6 +2,9 @@ version: "3"
 services:
   math:
     build: ./math_py
+    
+  string:
+    build: ./string_rust
   
   random:
     build: ./random_js
@@ -12,4 +15,5 @@ services:
       - 80:5000
     depends_on:
       - math
+      - string
       - random
