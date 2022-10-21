@@ -48,8 +48,6 @@ def string(op):
 
 @app.route('/random/<op>')
 def random(op):
-    # a = request.args.get('a', type=str)
-    # b = request.args.get('b', type=str)
     if op not in ALLOWED_RANDOM_OPS:
         return make_response('Invalid operation\n', 404)
     try:

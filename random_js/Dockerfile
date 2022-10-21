@@ -1,8 +1,7 @@
 FROM node:19-buster-slim
 
-WORKDIR /usr/src/app
-
-COPY . .
+ADD . /random_js
+WORKDIR /random_js
 
 RUN npm install
 
